@@ -2228,7 +2228,6 @@
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <customObject id="uEM-91-19k" customClass="SPUStandardUpdaterController"/>
                 <userDefaultsController representsSharedInstance="YES" id="JgT-L6-uQU"/>
             </objects>
             <point key="canvasLocation" x="-0.5" y="936.5"/>

@@ -10,7 +10,7 @@ Personal build based on upstream QLMarkdown 1.5.7 (`3a0cdcd`). This branch is in
 - Omits `com.apple.security.inherit` from the main app. The app retains its sandbox and shared-group entitlements. This configuration worked in an earlier development build, but the entitlement change alone has not been proven to explain the upstream registration failure.
 - Restores the saved base-font-size checkbox and value when loading settings. Previously the app saved a value such as 18 but reopened with the control disabled at 12; another save could then remove the override.
 - Uses the existing filename-based Markdown UTType lookup on all supported systems, allowing compilation with the installed SDK 26.5.
-- Does not start Sparkle and removes the upstream update feed from the app. Update this build by rebuilding the fork.
+- Does not start Sparkle, removes its independently instantiated storyboard updater controller, and removes the upstream update feed from the app. Update this build by rebuilding the fork.
 - Adds a `QLMarkdown Personal` scheme that uses Release for building/running.
 
 No automatic `pluginkit -a` or explicit registration API call is added.
@@ -22,7 +22,7 @@ No automatic `pluginkit -a` or explicit registration API call is added.
 3. Open `QLMarkdown.xcodeproj` in Xcode. Sign in to the account owning the configured Personal Team and use an existing Apple Development certificate. Other developers need to replace the team, bundle identifiers, and team-prefixed shared-group identifier consistently in all targets and `Settings.swift`.
 4. Select **QLMarkdown Personal → My Mac**, then **Product → Build**. Allow Xcode to resolve Swift packages.
 5. Locate the built `QLMarkdown.app` through Xcode's Products group, **Show in Finder**. Copy the complete app to `/Applications/QLMarkdown Personal.app`. Renaming the outer app folder leaves its signed contents intact. Keep the original app separate.
-6. Open the installed personal app once. In System Settings → General → Login Items & Extensions → Quick Look, enable **QLMarkdown Personal Preview**. Disable other Markdown preview providers while checking which provider renders your file.
+6. Open the installed personal app once. In System Settings → General → Login Items & Extensions → Quick Look, enable **QLMarkdown Personal Preview**. Disable providers with other bundle identifiers while checking which provider renders your file. Copies of this personal build in DerivedData and Applications share one enable/disable election; do not disable its duplicate rows after enabling it.
 
 macOS team-prefixed app groups do not require a provisioning profile; `REGISTER_APP_GROUPS` is off. See [Apple's app-group container documentation](https://developer.apple.com/documentation/xcode/accessing-app-group-containers). This build uses a development certificate for local use, not Developer ID signing/notarization for distribution. If the certificate expires or is revoked, rebuild with a valid certificate.
 
@@ -47,4 +47,4 @@ Xcode 26.6 / SDK 26.5 successfully built both Debug and the personal Release sch
 
 The installed `/Applications/QLMarkdown Personal.app` matches the Release product across 628 files/symlinks. The original application was preserved. Embedded CodeDirectory code hashes and XML-entitlement hashes match for both architectures in the app and both extensions, all with team `BS66N84A2F` and the personal shared group. This is an integrity check, not certificate-chain/Gatekeeper validation; the restricted automation shell could not complete a system trust check. Apple Development signing also injects `get-task-allow`, even with Release optimization; this is a local development build.
 
-The account owner confirmed that Base font size remains checked at 18 after saving, quitting and reopening the installed app. Finder-provider invocation and registration checks are recorded separately when confirmed.
+The account owner confirmed that Base font size remains checked at 18 after saving, quitting and reopening the installed app. A normal Terminal query confirmed registration of the installed personal extension and its Debug/Release build copies. All three initially had the ignore (`-`) election. PlugInKit applies elections by bundle identifier, so disabling one duplicate can disable the installed copy too. Finder-provider invocation remains to be confirmed after enabling it.
