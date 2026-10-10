@@ -62,7 +62,7 @@ enum OverrideMode: Int {
 }
 
 extension NSNotification.Name {
-    public static let QLMarkdownSettingsUpdated: NSNotification.Name = NSNotification.Name("org.sbarex.qlmarkdown-settings-changed")
+    public static let QLMarkdownSettingsUpdated: NSNotification.Name = NSNotification.Name("dev.danielgreenlaw.qlmarkdown-settings-changed")
 }
 
 // MARK: -
@@ -122,7 +122,7 @@ class Settings: Codable {
     // MARK: - Static properties and methods
     
     /// Shared App Groups name.
-    static let appGroup = "group.org.sbarex.qlmarkdown"
+    static let appGroup = "BS66N84A2F.dev.danielgreenlaw.qlmarkdown"
     
     /// Shared instance of the Settings.
     static let shared = {
@@ -149,7 +149,7 @@ class Settings: Codable {
 
             if let appBundle = Bundle(url: url) {
                 return appBundle
-            } else if let appBundle = Bundle(identifier: "org.sbarex.QLMarkdown") {
+            } else if let appBundle = Bundle(identifier: "dev.danielgreenlaw.qlmarkdown") {
                 return appBundle
             }
             // To access the main bundle, the extension must not be sandboxed (or must have a security exception entitlement to access the entire disk).

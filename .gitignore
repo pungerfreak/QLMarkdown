@@ -19,3 +19,6 @@ build/**
 
 *.dSYM
 /highlight-wrapper/lua-5.5.0/src/luac
+
+# Local Xcode products
+/DerivedData/

@@ -1,3 +1,5 @@
+> This branch builds **QLMarkdown Personal**, a personal fork of [sbarex/QLMarkdown](https://github.com/sbarex/QLMarkdown). See [personal build instructions](PERSONAL-BUILD.md) for signing, installation, differences, and limitations.
+
 [![counter](https://img.shields.io/github/downloads/sbarex/qlmarkdown/latest/total)](https://github.com/sbarex/QLMarkdown/releases) [![counter](https://img.shields.io/github/downloads/sbarex/qlmarkdown/total)](https://github.com/sbarex/QLMarkdown/releases)
 
 [![buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy+me+a+coffee&emoji=&slug=sbarex&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff")](https://www.buymeacoffee.com/sbarex)

@@ -9,7 +9,7 @@ import Foundation
 import OSLog
 
 extension OSLog {
-    private static let subsystem = "org.sbarex.QLMarkdown"
+    private static let subsystem = "dev.danielgreenlaw.qlmarkdown"
 
     static let quickLookExtension = OSLog(subsystem: subsystem, category: "Quick Look Extension")
     static let cli = OSLog(subsystem: subsystem, category: "Command Line Tool")

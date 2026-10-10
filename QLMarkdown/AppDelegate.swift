@@ -106,25 +106,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
             localizeMainMenu()
         }
         
-        // Insert code here to initialize your application
-        let hostBundle = Bundle.main
-        let applicationBundle = hostBundle;
-        
-        self.userDriver = SPUStandardUserDriver(hostBundle: hostBundle, delegate: nil)
-        self.updater = SPUUpdater(hostBundle: hostBundle, applicationBundle: applicationBundle, userDriver: self.userDriver!, delegate: nil)
-        
-        do {
-            try self.updater!.start()
-        } catch {
-            print("Failed to start updater with error: \(error)")
-            
-            let alert = NSAlert()
-            alert.messageText = NSLocalizedString("Updater Error", comment: "autoupdate message error")
-            alert.informativeText = NSLocalizedString("The Updater failed to start. For detailed error information, check the Console.app log.", comment: "")
-            alert.addButton(withTitle: NSLocalizedString("Close", comment: "Close button")).keyEquivalent = "\u{1b}"
-            alert.runModal()
-        }
-        
+        // Personal builds are updated by rebuilding from this fork.
+        // Do not start Sparkle against the upstream developer's release feed.
+
         Settings.shared.installDependencies(override: .onlyOlder)
         
         // Build the Examples menu
@@ -223,6 +207,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSMenuItemValidation {
             return self.updater?.canCheckForUpdates ?? false
         }
         if menuItem.identifier?.rawValue.starts(with: "update_refresh") ?? false {
+            guard updater != nil else { return false }
             menuItem.state = ((NSApplication.shared.delegate as? AppDelegate)?.updater?.updateCheckInterval == TimeInterval(menuItem.tag)) ? .on : .off
         } else if menuItem.identifier?.rawValue == "auto refresh" {
             if let a = UserDefaults.standard.value(forKey: "auto-refresh") as? Bool {

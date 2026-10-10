@@ -777,11 +777,7 @@ class ViewController: NSViewController {
         panel.canChooseDirectories = false
         panel.canCreateDirectories = false
         panel.allowsMultipleSelection = false
-        if #available(macOS 27, *) {
-            panel.allowedContentTypes = [.markdown]
-        } else {
-            panel.allowedContentTypes = [UTType(filenameExtension: "md") ?? .data]
-        }
+        panel.allowedContentTypes = [UTType(filenameExtension: "md") ?? .data]
         panel.message = NSLocalizedString("Select a Markdown file to preview", comment: "")
         
         let result = panel.runModal()
@@ -798,11 +794,7 @@ class ViewController: NSViewController {
         savePanel.canCreateDirectories = true
         savePanel.showsTagField = false
         var types: [UTType] = []
-        if #available(macOS 27, *) {
-            types.append(.markdown)
-        } else {
-            types.append(UTType(filenameExtension: "md") ?? .data)
-        }
+        types.append(UTType(filenameExtension: "md") ?? .data)
         if let t = UTType(filenameExtension: "rmd") {
             types.append(t)
         }
@@ -1348,6 +1340,9 @@ document.addEventListener('scroll', function(e) {
         
         self.lockDirty = true
         
+        self.useBaseFontSize = settings.baseFontSize > 0
+        self.baseFontSize = settings.baseFontSize > 0 ? settings.baseFontSize : 12
+
         self.debugMode = settings.debug
         self.isAboutVisible = settings.about
         self.renderAsCode = settings.renderAsCode
